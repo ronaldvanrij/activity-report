@@ -16,6 +16,7 @@ jobs:
       - name: Run Audit fix
         run: |
           npm_config_yes=true npx yarn-audit-fix
+          npm i --package-lock-only
           npm audit fix --force
 
       - name: Build
