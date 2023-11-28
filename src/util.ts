@@ -166,6 +166,9 @@ export namespace Util {
 
     return {
       days: Number.isFinite(days) ? days : 7,
+
+      createIssue: core.getInput('create_issue') !== 'false',
+
       publishPulls: core.getInput('publish_pull_requests') !== 'false',
       publishIssues: core.getInput('publish_issues') !== 'false',
       publishTopHotIssues: numberInput('publish_top_hot_issues', 3),

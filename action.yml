@@ -7,6 +7,11 @@ inputs:
     required: true
     description: Your GitHub token for authentication.
 
+  create_issue:
+    required: false
+    description: Automatically create an issue containing the report
+    default: true
+
   publish_issues:
     required: false
     description: Should publish issues or not.
@@ -171,6 +176,12 @@ inputs:
   template_releases_item:
     description: Template to render releases item.
     required: false
+
+outputs:
+  title:
+    description: 'Title of the report'
+  body:
+    description: 'Body of the report'
 
 runs:
   using: node16
