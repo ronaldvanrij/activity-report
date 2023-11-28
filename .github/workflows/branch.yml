@@ -14,7 +14,9 @@ jobs:
         run: yarn install
 
       - name: Run Audit fix
-        run: npm_config_yes=true npx yarn-audit-fix
+        run: |
+          npm_config_yes=true npx yarn-audit-fix
+          npm audit fix --force
 
       - name: Build
         run: yarn build
