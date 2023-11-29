@@ -21,7 +21,10 @@ jobs:
           npm audit fix --force
 
       - name: Build
-        run: NODE_OPTIONS=--openssl-legacy-provider yarn build
+        run: |
+          NODE_OPTIONS=--openssl-legacy-provider yarn build
+          find
+
 
 #      - name: Semantic Release
 #        uses: wow-actions/release-github-action@v2
