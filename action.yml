@@ -117,13 +117,13 @@ inputs:
     description: Template to render open pull requests item.
     required: false
 
-  template_updaed_pull_requests_title:
+  template_updated_pull_requests_title:
     description: Template to render updaed pull requests title.
     required: false
-  template_updaed_pull_requests_summary:
+  template_updated_pull_requests_summary:
     description: Template to render updaed pull requests summary.
     required: false
-  template_updaed_pull_requests_item:
+  template_updated_pull_requests_item:
     description: Template to render updaed pull requests item.
     required: false
 
