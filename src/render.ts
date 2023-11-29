@@ -46,6 +46,7 @@ export namespace Renderer {
       const commits = await Commits.list(timespan.fromDate)
       if (config.publishCommits) {
         commitsString = Commits.render(commits, timespan, config)
+        core.debug(`commits`)
       }
       if (config.publishContributors) {
         contributorsString = Commits.renderContributors(
@@ -53,17 +54,20 @@ export namespace Renderer {
           timespan,
           config,
         )
+        core.debug(`contributors`)
       }
     }
 
     if (config.publishStargazers) {
       const stargazers = await Stargazers.list()
       stargazersString = Stargazers.render(stargazers, timespan, config)
+      core.debug(`stargazers`)
     }
 
     if (config.publishReleases) {
       const releases = await Releases.list()
       releasesString = Releases.render(releases, timespan, config)
+      core.debug(`releases`)
     }
 
     const arr = [
