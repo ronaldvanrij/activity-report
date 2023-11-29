@@ -217,8 +217,8 @@ export namespace Issues {
     return `${anchor}\n<!-- ${timespan.fromDate} - ${timespan.toDate}  -->`
   }
 
-  function checkIssueBody(body = '') {
-    return body.indexOf(anchor) === -1
+  function checkIssueBody(body) {
+    return body && body.indexOf(anchor) === -1
   }
 
   type IssueList = Await<ReturnType<typeof list>>
