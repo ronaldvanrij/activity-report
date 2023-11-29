@@ -6,11 +6,10 @@ import { Reactions } from './reactions'
 import { Await, Config, Timespan } from './types'
 
 export namespace Issues {
-  export async function list(fromDate: string) {
+  export async function list() {
     const issues = await octokit.paginate(octokit.rest.issues.listForRepo, {
       ...context.repo,
       state: 'all',
-      since: fromDate,
       per_page: 100,
     })
     return issues
@@ -48,8 +47,7 @@ export namespace Issues {
     timespan: Timespan,
     config: Config,
   ) {
-    const issues = issueList.filter(
-      (issue) =>
+    const newIssues = issueList.filter((issue) =>
         issue.pull_request == null &&
         moment(issue.created_at).isBetween(
           timespan.fromDate,
@@ -60,143 +58,150 @@ export namespace Issues {
 
     const result: string[] = []
     result.push(renderTitle(timespan, config))
-    result.push(renderSummary(timespan, config, issues))
+    // result.push(renderSummary(timespan, config, issues))
 
-    if (issues.length > 0) {
-      const openIssues = issues.filter((issue) => issue.state === 'open')
-      const closedIssues = issues.filter((issue) => issue.state === 'closed')
-      result.push(
+    if (newIssues.length > 0) {
+      //const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
+      //const section: string[] = [renderOpenIssuesTitle(timespan, config, openNewIssues, issues) ]
+      const section: string[] = [ ]
+
+      newIssues.forEach((issue) => {
+        section.push(
+          renderOpenIssuesItem(timespan, config, issue, newIssues, issues),
+        )
+      })
+
+      result.push(section.join('\n'))
+    }
+
+
+    const closedIssues = issueList.filter((issue) =>
+        issue.pull_request == null &&
+        moment(issue.closed_at).isBetween(
+          timespan.fromDate,
+          timespan.toDate,
+        ) &&
+        checkIssueBody(issue.body || ''),
+    )
+
+/*      result.push(
         renderStatistics(timespan, config, issues, openIssues, closedIssues),
       )
+*/
 
-      if (openIssues.length > 0) {
-        const section: string[] = [
-          renderOpenIssuesTitle(timespan, config, openIssues, issues),
-        ]
+    if (closedIssues.length > 0) {
+      const section: string[] = [
+        renderClosedIssuesTitle(timespan, config, closedIssues, issues),
+      ]
+      closedIssues.forEach((issue) => {
+        section.push(
+          renderClosedIssuesItem(
+            timespan,
+            config,
+            issue,
+            closedIssues,
+            issues,
+          ),
+        )
+      })
+      result.push(section.join('\n'))
+    }
 
-        openIssues.forEach((issue) => {
-          section.push(
-            renderOpenIssuesItem(timespan, config, issue, openIssues, issues),
-          )
-        })
+    // For Liked issue
+    // ---------------
+    if (config.publishTopLikedIssues > 0) {
+      const likeMap: { [issue: number]: number } = {}
+      const likeTypes = ['+1', 'laugh', 'hooray', 'heart', 'rocket']
 
-        result.push(section.join('\n'))
-      }
+      issues.forEach((issue) => {
+        likeMap[issue.number] = reactions[issue.number].reduce(
+          (memo: number, { content }) =>
+            memo + (likeTypes.includes(content) ? 1 : 0),
+          0,
+        )
+      })
 
-      if (closedIssues.length > 0) {
-        const section: string[] = [
-          renderClosedIssuesTitle(timespan, config, closedIssues, issues),
-        ]
-        closedIssues.forEach((issue) => {
-          section.push(
-            renderClosedIssuesItem(
-              timespan,
-              config,
-              issue,
-              closedIssues,
-              issues,
-            ),
-          )
-        })
-        result.push(section.join('\n'))
-      }
+      const likedIssues = issues
+        .filter((issue) => likeMap[issue.number] > 0)
+        .sort((a, b) => likeMap[b.number] - likeMap[a.number])
+        .slice(0, config.publishTopLikedIssues)
 
-      // For Liked issue
-      // ---------------
-      if (config.publishTopLikedIssues > 0) {
-        const likeMap: { [issue: number]: number } = {}
-        const likeTypes = ['+1', 'laugh', 'hooray', 'heart', 'rocket']
+      if (likedIssues.length > 0) {
+        const reactionMap = (issue: IssueList[0]) => {
+          let plus = 0
+          let laugh = 0
+          let hooray = 0
+          let heart = 0
+          let rocket = 0
 
-        issues.forEach((issue) => {
-          likeMap[issue.number] = reactions[issue.number].reduce(
-            (memo: number, { content }) =>
-              memo + (likeTypes.includes(content) ? 1 : 0),
-            0,
-          )
-        })
-
-        const likedIssues = issues
-          .filter((issue) => likeMap[issue.number] > 0)
-          .sort((a, b) => likeMap[b.number] - likeMap[a.number])
-          .slice(0, config.publishTopLikedIssues)
-
-        if (likedIssues.length > 0) {
-          const reactionMap = (issue: IssueList[0]) => {
-            let plus = 0
-            let laugh = 0
-            let hooray = 0
-            let heart = 0
-            let rocket = 0
-
-            reactions[issue.number].forEach(({ content }) => {
-              if (content === '+1') {
-                plus += 1
-              } else if (content === 'laugh') {
-                laugh += 1
-              } else if (content === 'hooray') {
-                hooray += 1
-              } else if (content === 'heart') {
-                heart += 1
-              } else if (content === 'rocket') {
-                rocket += 1
-              }
-            })
-
-            return {
-              laugh,
-              hooray,
-              heart,
-              rocket,
-              '+1': plus,
+          reactions[issue.number].forEach(({ content }) => {
+            if (content === '+1') {
+              plus += 1
+            } else if (content === 'laugh') {
+              laugh += 1
+            } else if (content === 'hooray') {
+              hooray += 1
+            } else if (content === 'heart') {
+              heart += 1
+            } else if (content === 'rocket') {
+              rocket += 1
             }
+          })
+
+          return {
+            laugh,
+            hooray,
+            heart,
+            rocket,
+            '+1': plus,
           }
-
-          result.push(
-            [
-              renderLikedIssuesTitle(timespan, config, likedIssues, issues),
-              likedIssues
-                .map((issue) =>
-                  renderLikedIssuesItem(
-                    timespan,
-                    config,
-                    issue,
-                    reactionMap(issue),
-                    likedIssues,
-                    issues,
-                  ),
-                )
-                .join('\n'),
-            ].join('\n'),
-          )
         }
+
+        result.push(
+          [
+            renderLikedIssuesTitle(timespan, config, likedIssues, issues),
+            likedIssues
+              .map((issue) =>
+                renderLikedIssuesItem(
+                  timespan,
+                  config,
+                  issue,
+                  reactionMap(issue),
+                  likedIssues,
+                  issues,
+                ),
+              )
+              .join('\n'),
+          ].join('\n'),
+        )
       }
+    }
 
-      // For Hot issue
-      // ---------------
-      if (config.publishTopHotIssues > 0) {
-        const hotIssues = issues
-          .filter((item) => item.comments > 0)
-          .sort((a, b) => b.comments - a.comments)
-          .slice(0, config.publishTopHotIssues)
+    // For Hot issue
+    // ---------------
+    if (config.publishTopHotIssues > 0) {
+      const hotIssues = issues
+        .filter((item) => item.comments > 0)
+        .sort((a, b) => b.comments - a.comments)
+        .slice(0, config.publishTopHotIssues)
 
-        if (hotIssues.length > 0) {
-          result.push(
-            [
-              renderHotIssuesTitle(timespan, config, hotIssues, issues),
-              hotIssues
-                .map((issue) =>
-                  renderHotIssuesItem(
-                    timespan,
-                    config,
-                    issue,
-                    hotIssues,
-                    issues,
-                  ),
-                )
-                .join('\n'),
-            ].join('\n'),
-          )
-        }
+      if (hotIssues.length > 0) {
+        result.push(
+          [
+            renderHotIssuesTitle(timespan, config, hotIssues, issues),
+            hotIssues
+              .map((issue) =>
+                renderHotIssuesItem(
+                  timespan,
+                  config,
+                  issue,
+                  hotIssues,
+                  issues,
+                ),
+              )
+              .join('\n'),
+          ].join('\n'),
+        )
       }
     }
 

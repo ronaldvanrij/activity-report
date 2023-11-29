@@ -27,7 +27,7 @@ export namespace Renderer {
     let releasesString: string | undefined
 
     if (config.publishIssues) {
-      const issues = await Issues.list(timespan.fromDate)
+      const issues = await Issues.list()
       const reactions =
         config.publishTopLikedIssues > 0
           ? await Reactions.map(issues.map((issue) => issue.number))
