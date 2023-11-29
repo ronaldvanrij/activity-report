@@ -217,7 +217,7 @@ export namespace Issues {
     return `${anchor}\n<!-- ${timespan.fromDate} - ${timespan.toDate}  -->`
   }
 
-  function checkIssueBody(body) {
+  function checkIssueBody(body: string) {
     return body && body.indexOf(anchor) === -1
   }
 
