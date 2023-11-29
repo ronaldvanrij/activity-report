@@ -23,13 +23,13 @@ jobs:
       - name: Build
         run: NODE_OPTIONS=--openssl-legacy-provider yarn build
 
-      - name: Semantic Release
-        uses: wow-actions/release-github-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Semantic Release
+#        uses: wow-actions/release-github-action@v2
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Commit and push
-#        uses: EndBug/add-and-commit@v9 
-#        with:
-#          add: '*'
-#          message: Auto compile
+      - name: Commit and push
+        uses: EndBug/add-and-commit@v9 
+        with:
+          add: '* dist node_modules'
+          message: Auto compile
