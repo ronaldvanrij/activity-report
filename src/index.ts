@@ -12,11 +12,11 @@ async function run() {
   const title = Renderer.renderTitle(timespan, config)
   const body = await Renderer.renderBody(timespan, config)
 
-  core.debug(`1111`)
-  if (config.createIssue) {
+  core.debug(`1234`)
+/*  if (config.createIssue) {
     const labels = config.addLabels || `${Util.lcfirst(timespan.name)}-report`
     await Issues.create(title, body, labels)
-  }
+  }*/
   core.debug(`22222`)
 
   core.setOutput('title', title)
