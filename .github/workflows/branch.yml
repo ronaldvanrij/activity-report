@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: |
           NODE_OPTIONS=--openssl-legacy-provider yarn build
-          find
+          rm -rf node_modules
 
 
 #      - name: Semantic Release
@@ -34,5 +34,5 @@ jobs:
       - name: Commit and push
         uses: EndBug/add-and-commit@v9 
         with:
-          add: '-f * dist node_modules node_modules/.bin'
+          add: '-f . dist'
           message: Auto compile
