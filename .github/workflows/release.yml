@@ -10,23 +10,23 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - name: ⤵️　Checkout
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: 🚧　Install
+      - name: Install
         run: yarn install
 
-      - name: 📦　Build
+      - name: Build
         run: yarn build
 
-      - name: 🔑　Generate Token
+      - name: Generate Token
         uses: wow-actions/use-app-token@v1
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
           env_name: bot_token
 
-      - name: 📦　Release
+      - name: Release
         uses: wow-actions/release-github-action@v1
         with:
           GITHUB_TOKEN: ${{ env.bot_token }}
