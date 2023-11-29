@@ -81,7 +81,7 @@ export namespace Renderer {
 
     arr.forEach((item) => {
       core.debug(`1111`)
-        
+
       if (item) {
         core.debug(`AAAA`)
         body += '\n - - - \n'
