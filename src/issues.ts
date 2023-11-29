@@ -100,7 +100,6 @@ export namespace Issues {
             config,
             issue,
             closedIssues,
-            issues,
           ),
         )
       })
@@ -113,7 +112,7 @@ export namespace Issues {
       const likeMap: { [issue: number]: number } = {}
       const likeTypes = ['+1', 'laugh', 'hooray', 'heart', 'rocket']
 
-      issues.forEach((issue) => {
+      issueList.forEach((issue) => {
         likeMap[issue.number] = reactions[issue.number].reduce(
           (memo: number, { content }) =>
             memo + (likeTypes.includes(content) ? 1 : 0),
@@ -121,7 +120,7 @@ export namespace Issues {
         )
       })
 
-      const likedIssues = issues
+      const likedIssues = issueList
         .filter((issue) => likeMap[issue.number] > 0)
         .sort((a, b) => likeMap[b.number] - likeMap[a.number])
         .slice(0, config.publishTopLikedIssues)
@@ -167,8 +166,7 @@ export namespace Issues {
                   config,
                   issue,
                   reactionMap(issue),
-                  likedIssues,
-                  issues,
+                  likedIssues
                 ),
               )
               .join('\n'),
@@ -180,7 +178,7 @@ export namespace Issues {
     // For Hot issue
     // ---------------
     if (config.publishTopHotIssues > 0) {
-      const hotIssues = issues
+      const hotIssues = issueList
         .filter((item) => item.comments > 0)
         .sort((a, b) => b.comments - a.comments)
         .slice(0, config.publishTopHotIssues)
@@ -196,7 +194,6 @@ export namespace Issues {
                   config,
                   issue,
                   hotIssues,
-                  issues,
                 ),
               )
               .join('\n'),
@@ -281,14 +278,12 @@ export namespace Issues {
     config: Config,
     issue: IssueList[0],
     openIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateOpenIssuesItem,
       timespan,
       {
         issue,
-        issues,
         openIssues,
         issueLink: issueLink(issue),
         userLink: userLink(issue),
@@ -301,13 +296,11 @@ export namespace Issues {
     timespan: Timespan,
     config: Config,
     closedIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateClosedIssuesTitle,
       timespan,
       {
-        issues,
         closedIssues,
       },
       true,
@@ -319,14 +312,12 @@ export namespace Issues {
     config: Config,
     issue: IssueList[0],
     closedIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateClosedIssuesItem,
       timespan,
       {
         issue,
-        issues,
         closedIssues,
         issueLink: issueLink(issue),
         userLink: userLink(issue),
@@ -339,14 +330,12 @@ export namespace Issues {
     timespan: Timespan,
     config: Config,
     likedIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateLikedIssuesTitle,
       timespan,
       {
         likedIssues,
-        issues,
       },
       true,
     )
@@ -358,14 +347,12 @@ export namespace Issues {
     issue: IssueList[0],
     reactions: Record<string, number>,
     likedIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateLikedIssuesReaction,
       timespan,
       {
         issue,
-        issues,
         reactions,
         likedIssues,
       },
@@ -379,7 +366,6 @@ export namespace Issues {
     issue: IssueList[0],
     reactions: Record<string, number>,
     likedIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateLikedIssuesItem,
@@ -394,7 +380,6 @@ export namespace Issues {
           issue,
           reactions,
           likedIssues,
-          issues,
         ),
         issueLink: issueLink(issue),
         userLink: userLink(issue),
@@ -407,13 +392,11 @@ export namespace Issues {
     timespan: Timespan,
     config: Config,
     hotIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateHotIssuesTitle,
       timespan,
       {
-        issues,
         hotIssues,
       },
       true,
@@ -425,14 +408,12 @@ export namespace Issues {
     config: Config,
     issue: IssueList[0],
     hotIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateHotIssuesItem,
       timespan,
       {
         issue,
-        issues,
         hotIssues,
         issueLink: issueLink(issue),
         userLink: userLink(issue),
