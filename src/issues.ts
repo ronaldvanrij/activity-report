@@ -61,7 +61,7 @@ export namespace Issues {
 
     if (newIssues.length > 0) {
       //const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
-      const section: string[] = [renderOpenIssuesTitle(timespan, config, openNewIssues) ]
+      const section: string[] = [renderOpenIssuesTitle(timespan, config, newIssues) ]
       
       newIssues.forEach((issue) => {
         section.push(
@@ -226,7 +226,7 @@ export namespace Issues {
   function renderTitle(timespan: Timespan, config: Config) {
     return Util.render(config.templateIssuesTitle, timespan, {}, true)
   }
-
+/*
   function renderStatistics(
     timespan: Timespan,
     config: Config,
@@ -245,7 +245,7 @@ export namespace Issues {
       true,
     )
   }
-
+*/
   function renderOpenIssuesTitle(
     timespan: Timespan,
     config: Config,
