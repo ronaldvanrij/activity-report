@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import { Util } from './util'
-import { Issues } from './issues'
+//import { Issues } from './issues'
 import { Renderer } from './render'
 
 async function run() {
