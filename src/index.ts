@@ -18,13 +18,12 @@ async function run() {
     await Issues.create(title, body, labels)
   }
   core.debug(`22222`)
-  
+
   core.setOutput('title', title)
   core.setOutput('body', body)
   core.setOutput('report_start', timespan.fromDate)
   core.setOutput('report_end', timespan.toDate)
   core.debug(`3333`)
-  
 }
 
 run()
