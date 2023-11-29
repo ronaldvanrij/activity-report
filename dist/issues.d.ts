@@ -1,7 +1,7 @@
 import { Reactions } from './reactions';
 import { Config, Timespan } from './types';
 export declare namespace Issues {
-    function list(fromDate: string): Promise<{
+    function list(): Promise<{
         id: number;
         node_id: string;
         url: string;

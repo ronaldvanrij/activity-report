@@ -47,7 +47,8 @@ export namespace Issues {
     timespan: Timespan,
     config: Config,
   ) {
-    const newIssues = issueList.filter((issue) =>
+    const newIssues = issueList.filter(
+      (issue) =>
         issue.pull_request == null &&
         moment(issue.created_at).isBetween(
           timespan.fromDate,
@@ -60,29 +61,26 @@ export namespace Issues {
     result.push(renderTitle(timespan, config))
 
     if (newIssues.length > 0) {
-      //const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
-      const section: string[] = [renderOpenIssuesTitle(timespan, config, newIssues) ]
-      
+      // const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
+      const section: string[] = [
+        renderOpenIssuesTitle(timespan, config, newIssues),
+      ]
+
       newIssues.forEach((issue) => {
-        section.push(
-          renderOpenIssuesItem(timespan, config, issue, newIssues),
-        )
+        section.push(renderOpenIssuesItem(timespan, config, issue, newIssues))
       })
 
       result.push(section.join('\n'))
     }
 
-
-    const closedIssues = issueList.filter((issue) =>
+    const closedIssues = issueList.filter(
+      (issue) =>
         issue.pull_request == null &&
-        moment(issue.closed_at).isBetween(
-          timespan.fromDate,
-          timespan.toDate,
-        ) &&
+        moment(issue.closed_at).isBetween(timespan.fromDate, timespan.toDate) &&
         checkIssueBody(issue.body || ''),
     )
 
-/*      result.push(
+    /*      result.push(
         renderStatistics(timespan, config, issues, openIssues, closedIssues),
       )
 */
@@ -93,12 +91,7 @@ export namespace Issues {
       ]
       closedIssues.forEach((issue) => {
         section.push(
-          renderClosedIssuesItem(
-            timespan,
-            config,
-            issue,
-            closedIssues,
-          ),
+          renderClosedIssuesItem(timespan, config, issue, closedIssues),
         )
       })
       result.push(section.join('\n'))
@@ -164,7 +157,7 @@ export namespace Issues {
                   config,
                   issue,
                   reactionMap(issue),
-                  likedIssues
+                  likedIssues,
                 ),
               )
               .join('\n'),
@@ -187,12 +180,7 @@ export namespace Issues {
             renderHotIssuesTitle(timespan, config, hotIssues),
             hotIssues
               .map((issue) =>
-                renderHotIssuesItem(
-                  timespan,
-                  config,
-                  issue,
-                  hotIssues,
-                ),
+                renderHotIssuesItem(timespan, config, issue, hotIssues),
               )
               .join('\n'),
           ].join('\n'),
@@ -226,7 +214,7 @@ export namespace Issues {
   function renderTitle(timespan: Timespan, config: Config) {
     return Util.render(config.templateIssuesTitle, timespan, {}, true)
   }
-/*
+  /*
   function renderStatistics(
     timespan: Timespan,
     config: Config,

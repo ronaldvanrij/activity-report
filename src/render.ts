@@ -91,7 +91,7 @@ export namespace Renderer {
     body +=
       '> Your [**Activity Report**](https://github.com/marketplace/actions/activity-report) bot. :calendar:\n'
 
-      return body
+    return body
   }
 
   function renderHeader(timespan: Timespan, config: Config) {
