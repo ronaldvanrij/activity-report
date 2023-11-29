@@ -12,13 +12,13 @@ async function run() {
   const title = Renderer.renderTitle(timespan, config)
   const body = await Renderer.renderBody(timespan, config)
 
-  if (config.createIssue){
+  if (config.createIssue) {
     const labels = config.addLabels || `${Util.lcfirst(timespan.name)}-report`
     await Issues.create(title, body, labels)
   }
 
-  core.setOutput('title', title);
-  core.setOutput('body', body);
+  core.setOutput('title', title)
+  core.setOutput('body', body)
 }
 
 run()

@@ -55,7 +55,7 @@ export namespace Issues {
           timespan.fromDate,
           timespan.toDate,
         ) &&
-        checkIssueBody(issue.body || ""),
+        checkIssueBody(issue.body || ''),
     )
 
     const result: string[] = []
