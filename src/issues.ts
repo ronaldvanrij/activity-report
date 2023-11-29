@@ -70,7 +70,7 @@ export namespace Issues {
         section.push(renderOpenIssuesItem(timespan, config, issue, newIssues))
       })
 
-      result.push(section.join('\n'))
+      result.push(section.join('\n\n'))
     }
 
     const closedIssues = issueList.filter(
@@ -94,7 +94,7 @@ export namespace Issues {
           renderClosedIssuesItem(timespan, config, issue, closedIssues),
         )
       })
-      result.push(section.join('\n'))
+      result.push(section.join('\n\n'))
     }
 
     // For Liked issue
@@ -160,8 +160,8 @@ export namespace Issues {
                   likedIssues,
                 ),
               )
-              .join('\n'),
-          ].join('\n'),
+              .join('\n\n'),
+          ].join('\n\n'),
         )
       }
     }
@@ -182,15 +182,15 @@ export namespace Issues {
               .map((issue) =>
                 renderHotIssuesItem(timespan, config, issue, hotIssues),
               )
-              .join('\n'),
-          ].join('\n'),
+              .join('\n\n'),
+          ].join('\n\n'),
         )
       }
     }
 
     result.push(renderHiddenArea(timespan))
 
-    return result.join('\n')
+    return result.join('\n\n')
   }
 
   const issueLink = (issue: IssueList[0]) =>
