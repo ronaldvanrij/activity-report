@@ -55,7 +55,7 @@ export namespace Issues {
           timespan.fromDate,
           timespan.toDate,
         ) &&
-        checkIssueBody(issue.body),
+        checkIssueBody(issue.body || ""),
     )
 
     const result: string[] = []
@@ -217,8 +217,8 @@ export namespace Issues {
     return `${anchor}\n<!-- ${timespan.fromDate} - ${timespan.toDate}  -->`
   }
 
-  function checkIssueBody(body: string) {
-    return body && body.indexOf(anchor) === -1
+  function checkIssueBody(body = '') {
+    return body.indexOf(anchor) === -1
   }
 
   type IssueList = Await<ReturnType<typeof list>>
