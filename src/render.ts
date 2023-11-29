@@ -80,22 +80,18 @@ export namespace Renderer {
     ]
 
     arr.forEach((item) => {
-      core.debug(`1111`)
-
       if (item) {
-        core.debug(`AAAA`)
         body += '\n - - - \n'
         body += item
       }
     })
-    core.debug(`BBBB`)
 
     body += '\n\n'
     body += `${renderFooter(timespan, config)}\n\n`
     body +=
       '> Your [**Activity Report**](https://github.com/marketplace/actions/activity-report) bot. :calendar:\n'
-    core.debug(`CCCC`)
-    return body
+
+      return body
   }
 
   function renderHeader(timespan: Timespan, config: Config) {

@@ -58,13 +58,11 @@ export namespace Issues {
 
     const result: string[] = []
     result.push(renderTitle(timespan, config))
-    // result.push(renderSummary(timespan, config, issues))
 
     if (newIssues.length > 0) {
       //const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
-      //const section: string[] = [renderOpenIssuesTitle(timespan, config, openNewIssues, issues) ]
-      const section: string[] = [ ]
-
+      const section: string[] = [renderOpenIssuesTitle(timespan, config, openNewIssues) ]
+      
       newIssues.forEach((issue) => {
         section.push(
           renderOpenIssuesItem(timespan, config, issue, newIssues),
@@ -229,14 +227,6 @@ export namespace Issues {
     return Util.render(config.templateIssuesTitle, timespan, {}, true)
   }
 
-  function renderSummary(
-    timespan: Timespan,
-    config: Config,
-    issues: IssueList,
-  ) {
-    return Util.render(config.templateIssuesSummary, timespan, { issues })
-  }
-
   function renderStatistics(
     timespan: Timespan,
     config: Config,
@@ -260,13 +250,11 @@ export namespace Issues {
     timespan: Timespan,
     config: Config,
     openIssues: IssueList,
-    issues: IssueList,
   ) {
     return Util.render(
       config.templateOpenIssuesTitle,
       timespan,
       {
-        issues,
         openIssues,
       },
       true,
@@ -372,7 +360,6 @@ export namespace Issues {
       timespan,
       {
         issue,
-        issues,
         likedIssues,
         reactions: renderLikedIssuesReaction(
           timespan,
