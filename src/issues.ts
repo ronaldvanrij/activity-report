@@ -67,7 +67,7 @@ export namespace Issues {
 
       newIssues.forEach((issue) => {
         section.push(
-          renderOpenIssuesItem(timespan, config, issue, newIssues, issues),
+          renderOpenIssuesItem(timespan, config, issue, newIssues),
         )
       })
 
@@ -91,7 +91,7 @@ export namespace Issues {
 
     if (closedIssues.length > 0) {
       const section: string[] = [
-        renderClosedIssuesTitle(timespan, config, closedIssues, issues),
+        renderClosedIssuesTitle(timespan, config, closedIssues),
       ]
       closedIssues.forEach((issue) => {
         section.push(
@@ -159,7 +159,7 @@ export namespace Issues {
 
         result.push(
           [
-            renderLikedIssuesTitle(timespan, config, likedIssues, issues),
+            renderLikedIssuesTitle(timespan, config, likedIssues),
             likedIssues
               .map((issue) =>
                 renderLikedIssuesItem(
@@ -188,7 +188,7 @@ export namespace Issues {
       if (hotIssues.length > 0) {
         result.push(
           [
-            renderHotIssuesTitle(timespan, config, hotIssues, issues),
+            renderHotIssuesTitle(timespan, config, hotIssues),
             hotIssues
               .map((issue) =>
                 renderHotIssuesItem(
