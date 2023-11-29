@@ -1,5 +1,4 @@
 import * as core from '@actions/core'
-import { context } from '@actions/github'
 import { Util } from './util'
 import { Issues } from './issues'
 import { Renderer } from './render'
