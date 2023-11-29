@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import { Util } from './util'
-//import { Issues } from './issues'
+// import { Issues } from './issues'
 import { Renderer } from './render'
 
 async function run() {
@@ -13,10 +13,10 @@ async function run() {
   const body = await Renderer.renderBody(timespan, config)
 
   core.debug(`1234`)
-/*  if (config.createIssue) {
+  /*  if (config.createIssue) {
     const labels = config.addLabels || `${Util.lcfirst(timespan.name)}-report`
     await Issues.create(title, body, labels)
-  }*/
+  } */
   core.debug(`22222`)
 
   core.setOutput('title', title)
