@@ -7,6 +7,9 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+  
       - name: Install
         run: yarn install
 
@@ -17,9 +20,6 @@ jobs:
           npm i --package-lock-only
           npm audit fix --force
 
-      - name: Checkout
-        uses: actions/checkout@v4
-  
       - name: Build
         run: yarn build
 
