@@ -19,6 +19,8 @@ async function run() {
 
   core.setOutput('title', title)
   core.setOutput('body', body)
+  core.setOutput('report_start', timespan.fromDate)
+  core.setOutput('report_end', timespan.toDate)
 }
 
 run()

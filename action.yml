@@ -182,6 +182,10 @@ outputs:
     description: 'Title of the report'
   body:
     description: 'Body of the report'
+  report_start:
+    description: 'Start date of the report'
+  report_end:
+    description: 'End date of the report'
 
 runs:
   using: node16
