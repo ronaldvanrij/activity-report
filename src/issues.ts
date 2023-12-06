@@ -58,13 +58,13 @@ export namespace Issues {
     )
 
     const result: string[] = []
-    /*var title = renderTitle(timespan, config)
+    /* var title = renderTitle(timespan, config)
     if (title){
       result.push(title)
       result.push(
           renderStatistics(timespan, config, issues, openIssues, closedIssues),
         )
-    }*/
+    } */
 
     if (newIssues.length > 0) {
       // const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
@@ -85,8 +85,6 @@ export namespace Issues {
         moment(issue.closed_at).isBetween(timespan.fromDate, timespan.toDate) &&
         checkIssueBody(issue.body || ''),
     )
-
-
 
     if (closedIssues.length > 0) {
       const section: string[] = [
