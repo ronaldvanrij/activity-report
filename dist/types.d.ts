@@ -7,6 +7,8 @@ export interface Timespan {
     unit: string;
     fromDate: string;
     toDate: string;
+    fromDatePretty: string;
+    toDatePretty: string;
     fromDateObject: MomentObjectOutput;
     toDateObject: MomentObjectOutput;
 }

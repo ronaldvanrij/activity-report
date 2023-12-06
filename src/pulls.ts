@@ -74,7 +74,7 @@ export namespace PullRequests {
       if (opens.length > 0) {
         result.push(
           renderOpenPullRequestsTitle(timespan, config, opens, pullRequests),
-          //renderOpenPullRequestssSummary(timespan, config, opens, pullRequests),
+          // renderOpenPullRequestssSummary(timespan, config, opens, pullRequests),
           opens
             .map((pullRequest) =>
               renderOpenPullRequestsItem(
@@ -97,12 +97,12 @@ export namespace PullRequests {
             updates,
             pullRequests,
           ),
-          /*renderUpdatedPullRequestssSummary(
+          /* renderUpdatedPullRequestssSummary(
             timespan,
             config,
             updates,
             pullRequests,
-          ),*/
+          ), */
           updates
             .map((pullRequest) =>
               renderUpdatedPullRequestsItem(
@@ -120,12 +120,12 @@ export namespace PullRequests {
       if (merges.length > 0) {
         result.push(
           renderMergedPullRequestsTitle(timespan, config, merges, pullRequests),
-          /*renderMergedPullRequestssSummary(
+          /* renderMergedPullRequestssSummary(
             timespan,
             config,
             merges,
             pullRequests,
-          ),*/
+          ), */
           merges
             .map((pullRequest) =>
               renderMergedPullRequestsItem(
