@@ -203,6 +203,7 @@ export namespace PullRequests {
     )
   }
 
+  /*
   function renderOpenPullRequestssSummary(
     timespan: Timespan,
     config: Config,
@@ -219,6 +220,7 @@ export namespace PullRequests {
       true,
     )
   }
+*/
 
   function renderUpdatedPullRequestsTitle(
     timespan: Timespan,
@@ -258,6 +260,7 @@ export namespace PullRequests {
     )
   }
 
+  /*
   function renderUpdatedPullRequestssSummary(
     timespan: Timespan,
     config: Config,
@@ -274,6 +277,7 @@ export namespace PullRequests {
       true,
     )
   }
+  */
 
   function renderMergedPullRequestsTitle(
     timespan: Timespan,
@@ -313,6 +317,7 @@ export namespace PullRequests {
     )
   }
 
+  /*
   function renderMergedPullRequestssSummary(
     timespan: Timespan,
     config: Config,
@@ -329,4 +334,5 @@ export namespace PullRequests {
       true,
     )
   }
+  */
 }
