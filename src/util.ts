@@ -56,7 +56,7 @@ export namespace Util {
       toDate: toDateString,
       fromDate: fromDateString,
       toDatePretty: formatDateInTitle(toDateString),
-      fromDatePretty: formatDateInTitle(fromDate),
+      fromDatePretty: formatDateInTitle(fromDateString),
       toDateObject: moment(toDateString).toObject(),
       fromDateObject: moment(fromDateString).toObject(),
       name: period,
