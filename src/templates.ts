@@ -4,7 +4,7 @@ export namespace Templates {
   export const footer =
     '\n - - - \n' +
     '\n' +
-    `That's all for last <%= timespan.unit %>, please <kbd>:eyes: **Watch**</kbd> and <kbd>:star: **Star**</kbd> the repository [*<%= owner %>/<%= repo %>*](https://github.com/<%= owner %>/<%= repo %>) to receive next reports. :smiley:\n\n` +
+    `That's all for last <%= timespan.unit %>, please <kbd>**Watch**</kbd> and <kbd>**Star**</kbd> the repository [*<%= owner %>/<%= repo %>*](https://github.com/<%= owner %>/<%= repo %>) to receive next reports. :smiley:\n\n` +
     `
     <% if(labels.length) { %>
 *You can also [view all <%= timespan.name %> Reports by clicking here](https://github.com/<%= owner %>/<%= repo %>/issues?q=is:open+is:issue+label:<%= labels[0] %>).* \n\n
@@ -63,9 +63,9 @@ export namespace Templates {
   `
 
   export const openIssuesTitle = '## OPEN ISSUES'
-  export const openIssuesItem = `:green_heart: #<%= issue.number %> <%= issueLink %> by <%= userLink%>`
+  export const openIssuesItem = `#<%= issue.number %> <%= issueLink %> by <%= userLink%>`
   export const closedIssuesTitle = '## CLOSED ISSUES'
-  export const closedIssuesItem = `:heart: #<%= issue.number %> <%= issueLink %> by <%= userLink%>`
+  export const closedIssuesItem = `#<%= issue.number %> <%= issueLink %> by <%= userLink%>`
 
   export const likedIssuesTitle = `
     <% if (likedIssues.length > 1) { %>
@@ -97,10 +97,10 @@ export namespace Templates {
     <% if (hotIssues.length > 1) { %>
       ## TOP <%= hotIssues.length %> HOT ISSUES
     <% } else { %>
-      ## MOST HOTT ISSUE
+      ## MOST HOT ISSUE
     <% } %>
   `
-  export const hotIssuesItem = `:speaker: #<%= issue.number %> <%= issueLink %> by <%= userLink%>, received <%= issue.comments %> comments.`
+  export const hotIssuesItem = `#<%= issue.number %> <%= issueLink %> by <%= userLink%>, received <%= issue.comments %> comments.`
 
   // PULL REQUESTS
   // -------------
@@ -184,7 +184,7 @@ export namespace Templates {
       You all are the stars! :star2:
     <% }  %>
   `
-  export const stargazersItem = `:star: <%= userLink%>`
+  export const stargazersItem = `<%= userLink%>`
 
   // RELEASES
   // --------
@@ -198,5 +198,5 @@ export namespace Templates {
       Last <%= timespan.unit %> there were <%= releases.length %> releases.
     <% }  %>
   `
-  export const releasesItem = `:rocket: [<%= releaseName %>](<%= release.html_url %>)`
+  export const releasesItem = `[<%= releaseName %>](<%= release.html_url %>)`
 }

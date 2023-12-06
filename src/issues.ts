@@ -58,7 +58,13 @@ export namespace Issues {
     )
 
     const result: string[] = []
-    result.push(renderTitle(timespan, config))
+    var title = renderTitle(timespan, config)
+    if (title){
+      result.push(title)
+      result.push(
+          renderStatistics(timespan, config, issues, openIssues, closedIssues),
+        )
+    }
 
     if (newIssues.length > 0) {
       // const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
@@ -80,10 +86,7 @@ export namespace Issues {
         checkIssueBody(issue.body || ''),
     )
 
-    /*      result.push(
-        renderStatistics(timespan, config, issues, openIssues, closedIssues),
-      )
-*/
+
 
     if (closedIssues.length > 0) {
       const section: string[] = [
@@ -214,7 +217,7 @@ export namespace Issues {
   function renderTitle(timespan: Timespan, config: Config) {
     return Util.render(config.templateIssuesTitle, timespan, {}, true)
   }
-  /*
+  
   function renderStatistics(
     timespan: Timespan,
     config: Config,
@@ -233,7 +236,7 @@ export namespace Issues {
       true,
     )
   }
-*/
+
   function renderOpenIssuesTitle(
     timespan: Timespan,
     config: Config,
