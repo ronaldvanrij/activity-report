@@ -63,9 +63,9 @@ export namespace Templates {
   `
 
   export const openIssuesTitle = '## OPEN ISSUES'
-  export const openIssuesItem = `#<%= issue.number %> <%= issueLink %> by <%= userLink%>`
+  export const openIssuesItem = `* #<%= issue.number %> <%= issueLink %> by <%= userLink%>`
   export const closedIssuesTitle = '## CLOSED ISSUES'
-  export const closedIssuesItem = `#<%= issue.number %> <%= issueLink %> by <%= userLink%>`
+  export const closedIssuesItem = `* #<%= issue.number %> <%= issueLink %> by <%= userLink%>`
 
   export const likedIssuesTitle = `
     <% if (likedIssues.length > 1) { %>
@@ -91,7 +91,7 @@ export namespace Templates {
     <%= result.join(', ') %>
   `
 
-  export const likedIssuesItem = `:+1: #<%= issue.number %> <%= issueLink %> by <%= userLink%>, received <%= reactions %>.`
+  export const likedIssuesItem = `* #<%= issue.number %> <%= issueLink %> by <%= userLink%>, received <%= reactions %>.`
 
   export const hotIssuesTitle = `
     <% if (hotIssues.length > 1) { %>
@@ -100,7 +100,7 @@ export namespace Templates {
       ## MOST HOT ISSUE
     <% } %>
   `
-  export const hotIssuesItem = `#<%= issue.number %> <%= issueLink %> by <%= userLink%>, received <%= issue.comments %> comments.`
+  export const hotIssuesItem = `* #<%= issue.number %> <%= issueLink %> by <%= userLink%>, received <%= issue.comments %> comments.`
 
   // PULL REQUESTS
   // -------------
@@ -122,7 +122,7 @@ export namespace Templates {
       Last <%= timespan.unit %>, <%= openPullRequests.length %> pull requests were opened.
     <% }  %>
   `
-  export const openPullRequestsItem = `:green_heart: #<%= pullRequest.number %> <%= pullRequestLink %> by <%= userLink%>`
+  export const openPullRequestsItem = `* #<%= pullRequest.number %> <%= pullRequestLink %> by <%= userLink%>`
 
   export const updatedPullRequestsTitle = `## UPDATED PULL REQUEST`
   export const updatedPullRequestsSummary = `
@@ -132,7 +132,7 @@ export namespace Templates {
       Last <%= timespan.unit %>, <%= updatedPullRequests.length %> pull requests were updated.
     <% }  %>
   `
-  export const updatedPullRequestsItem = `:yellow_heart: #<%= pullRequest.number %> <%= pullRequestLink %> by <%= userLink%>`
+  export const updatedPullRequestsItem = `* #<%= pullRequest.number %> <%= pullRequestLink %> by <%= userLink%>`
 
   export const mergedPullRequestsTitle = `## MERGED PULL REQUEST`
   export const mergedPullRequestsSummary = `
@@ -142,7 +142,7 @@ export namespace Templates {
       Last <%= timespan.unit %>, <%= mergedPullRequests.length %> pull requests were merged.
     <% }  %>
   `
-  export const mergedPullRequestsItem = `:purple_heart: #<%= pullRequest.number %> <%= pullRequestLink %> by <%= userLink%>`
+  export const mergedPullRequestsItem = `* #<%= pullRequest.number %> <%= pullRequestLink %> by <%= userLink%>`
 
   // COMMITS
   // -------
@@ -156,7 +156,7 @@ export namespace Templates {
       Last <%= timespan.unit %> there were <%= commits.length %> commits.
     <% }  %>
   `
-  export const commitsItem = `:hammer_and_wrench: <%= commitLink %> by <%= userLink%>`
+  export const commitsItem = `* <%= commitLink %> by <%= userLink%>`
 
   // CONTRIBUTORS
   // ------------
@@ -170,7 +170,7 @@ export namespace Templates {
       Last <%= timespan.unit %> there were <%= contributors.length %> contributors.
     <% }  %>
   `
-  export const contributorsItem = `:bust_in_silhouette: <%= userLink%>`
+  export const contributorsItem = `* <%= userLink%>`
 
   // STARGAZERS
   // ----------
@@ -184,7 +184,7 @@ export namespace Templates {
       You all are the stars! :star2:
     <% }  %>
   `
-  export const stargazersItem = `<%= userLink%>`
+  export const stargazersItem = `* <%= userLink%>`
 
   // RELEASES
   // --------
@@ -198,5 +198,5 @@ export namespace Templates {
       Last <%= timespan.unit %> there were <%= releases.length %> releases.
     <% }  %>
   `
-  export const releasesItem = `[<%= releaseName %>](<%= release.html_url %>)`
+  export const releasesItem = `* [<%= releaseName %>](<%= release.html_url %>)`
 }

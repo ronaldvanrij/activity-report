@@ -44,11 +44,11 @@ export namespace PullRequests {
     )
 
     const result: string[] = []
-    var title = renderTitle(timespan, config)
+    /*var title = renderTitle(timespan, config)
     if (title){
       result.push(title)
       result.push(renderSummary(timespan, config, pullRequests))  
-    }
+    }*/
 
     if (pullRequests.length > 0) {
       const opens = pullRequests.filter(
@@ -143,7 +143,8 @@ export namespace PullRequests {
 
     return result.join('\n\n')
   }
-
+  
+  /*
   function renderTitle(timespan: Timespan, config: Config) {
     return Util.render(config.templatePullRequestsTitle, timespan, {}, true)
   }
@@ -162,6 +163,7 @@ export namespace PullRequests {
       true,
     )
   }
+  */
 
   function renderOpenPullRequestsTitle(
     timespan: Timespan,

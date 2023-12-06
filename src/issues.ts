@@ -58,13 +58,13 @@ export namespace Issues {
     )
 
     const result: string[] = []
-    var title = renderTitle(timespan, config)
+    /*var title = renderTitle(timespan, config)
     if (title){
       result.push(title)
       result.push(
           renderStatistics(timespan, config, issues, openIssues, closedIssues),
         )
-    }
+    }*/
 
     if (newIssues.length > 0) {
       // const openNewIssues = newIssues.filter((issue) => issue.state === 'open')
@@ -214,6 +214,7 @@ export namespace Issues {
 
   type IssueList = Await<ReturnType<typeof list>>
 
+  /*
   function renderTitle(timespan: Timespan, config: Config) {
     return Util.render(config.templateIssuesTitle, timespan, {}, true)
   }
@@ -236,6 +237,7 @@ export namespace Issues {
       true,
     )
   }
+  */
 
   function renderOpenIssuesTitle(
     timespan: Timespan,
